@@ -1,1 +1,3 @@
-test
+command /jobs:
+	trigger:
+		open chest with 5 rows named "&&c&lGray&b&lRP" to player
