@@ -1,0 +1,43 @@
+options:
+	StaffChat: staff.chat
+	NoPerms: &cYou don't have permission!
+	StaffChatPrefix: &cStaff Chat &8>
+	
+on chat:
+	{staff.chat.%player%}
+	cancel the event
+	loop all players:
+		if loop-player has permission "{@StaffChat}":
+			send "{@StaffChatPrefix} &7%player% &8» &7%message%" to loop-player
+			
+command /staffchat:
+	permission: {@StaffChat}
+	permission message: {@NoPerms}
+	trigger:
+		if {staff.chat.%player%} is not set:
+			set {staff.chat.%player%} to true
+			message "&cEnabled Staff Chat."
+			stop
+		if {staff.chat.%player%} is true:
+			set {staff.chat.%player%} to false
+			message "&cDisabled Staff Chat."
+			stop
+		if {staff.chat.%player%} is false:
+			set {staff.chat.%player%} to true
+			message "&cEnabled Staff Chat."
+
+command /sc:
+	permission: {@StaffChat}
+	permission message: {@NoPerms}
+	trigger:
+		if {staff.chat.%player%} is not set:
+			set {staff.chat.%player%} to true
+			message "&cEnabled Staff Chat."
+			stop
+		if {staff.chat.%player%} is true:
+			set {staff.chat.%player%} to false
+			message "&cDisabled Staff Chat."
+			stop
+		if {staff.chat.%player%} is false:
+			set {staff.chat.%player%} to true
+			message "&cEnabled Staff Chat."
