@@ -3,5 +3,16 @@ options:
 
 command /jobs:
 	trigger:
-		open chest with 5 rows named "&c&lGray&b&lRP" to player
-		format slot 0 of player with diamond block named "&bCitizen" with lore "&8(&7Click&8)" to run [close player's inventory] -> [make console execute command "pex user %player% group set citizen"] -> [broadcast "{@Prefix} &8%player% &7is now a &bCitizen&7."]
+		if {jobs.cooldown.%player's UUID%} is not set:
+			set {jobs.cooldown.%player's UUID%} to 0
+		if {jobs.cooldown.%player's UUID%} is 0:
+			open chest with 5 rows named "&c&lGray&b&lRP" to player
+			format slot 0 of player with diamond block named "&bCitizen" with lore "&8(&7Click&8)" to run [clear player's inventory] -> [close player's inventory] -> [make console execute command "pex user %player% group set citizen"] -> [broadcast "{@Prefix} &8%player% &7is now a &bCitizen&7."]
+			format slot 1 of player with blaze rod named "&cThief" with lore "&8(&7Click&8)" to run [clear player's inventory] -> [close player's inventory] -> [make console execute command "pex user %player% group set thief"] -> [broadcast "{@Prefix} &8%player% &7is now a &cThief&7."]
+			set {jobs.cooldown.%player's UUID%} to 180
+			loop 180 times:
+				subtract 1 from {jobs.cooldown.%player's UUID%}
+				wait 1 second
+		else:	
+			set {_cooldown} to {jobs.cooldown.%player's UUID%}
+			message "{@Prefix} &7You can't do this command for another &8%{_cooldown}% &7second(s)."
