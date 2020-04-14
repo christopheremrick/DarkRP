@@ -1,3 +1,7 @@
+options:
+	Prefix: &c&lGray&b&lRP &8>
+
 command /jobs:
 	trigger:
-		open chest with 5 rows named "&&c&lGray&b&lRP" to player
+		open chest with 5 rows named "&c&lGray&b&lRP" to player
+		format slot 0 of player with diamond block named "&bCitizen" with lore "&8(&7Click&8)" to run [close player's inventory] -> [make console execute command "pex user %player% group set citizen"] -> [broadcast "{@Prefix} &8%player% &7is now a &bCitizen&7."]
